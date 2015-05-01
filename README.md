@@ -22,7 +22,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This version of Onedrive Ruby assumes you already have an OAuth token to play with.
+
+First thing you'll need to do is instantiate a Onedrive::Client with the token:
+
+```ruby
+client = Onedrive::Client.new token: 'abcdef'
+```
+
+With that client, simply interact using the same concepts exposed via Onedrive's REST HTTP API:
+
+```ruby
+client.drive      # Returns the user's default `Drive`
+client.drives     # Lists all available `Drives`
+client.drive(id)  # Returns a specific `Drive` by its `id`
+client.item(id)   # Returns an `Item` by its `id`
+```
+
+The previous methods from the client will return either `Drive` or `Item` objects (or an array of).
+A `Drive` object can be traversed in depth by checking its content like this:
+
+```ruby
+drive = client.drive  # Returns default `Drive`
+drive.children        # Returns the contents of `drive`
+```
 
 ## Development
 
